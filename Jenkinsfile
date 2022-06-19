@@ -15,7 +15,7 @@ node {
         server = Artifactory.server 'jaytest4'
 
         // Tool name from Jenkins configuration
-        rtMaven.tool = Maven
+        rtMaven.tool = 'Maven'
         rtMaven.deployer releaseRepo: 'default-maven-virtual', snapshotRepo: 'default-maven-virtual', server: server
         rtMaven.resolver releaseRepo: 'default-maven-virtual', snapshotRepo: 'default-maven-virtual', server: server
         buildInfo = Artifactory.newBuildInfo()
