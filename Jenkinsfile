@@ -5,7 +5,7 @@ node {
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
     stage ('Test'){
-	sh 'env'
+	sh ${ARTIRFACTORY_SERVER}
     }    
 
     stage ('Clone') {
@@ -14,7 +14,7 @@ node {
 
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
-        server = Artifactory.server '${ARTIFACTORY_SERVER}'
+        server = Artifactory.server ${ARTIFACTORY_SERVER}
 
         // Tool name from Jenkins configuration
         rtMaven.tool = 'Maven'
