@@ -4,8 +4,14 @@ node {
     def server
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
-    stage ('Test'){
-	sh 'echo $ARTIRFACTORY_SERVER'
+    String snapshots
+    String releases
+    String jpd
+
+    stage ('Init'){
+	snapshots = ${SNAPSHOT_REPO}
+    releases = ${RELEASE_REPO}
+    jpd = ${ARTIFACTORY_SERVER}
     }    
 
     stage ('Clone') {
@@ -14,7 +20,7 @@ node {
 
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
-        server = Artifactory.server ${ARTIFACTORY_SERVER}
+        server = Artifactory.server jpd
 
         // Tool name from Jenkins configuration
         rtMaven.tool = 'Maven'
