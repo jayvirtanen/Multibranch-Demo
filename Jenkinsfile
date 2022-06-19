@@ -39,8 +39,8 @@ node {
         }
         // Tool name from Jenkins configuration
         rtMaven.tool = 'Maven'
-        rtMaven.deployer releaseRepo: releases, snapshotRepo: snapshots, server: server
-        rtMaven.resolver releaseRepo: releases, snapshotRepo: snapshots, server: server
+        rtMaven.deployer releaseRepo: releases, snapshotRepo: snapshotRepo, server: server
+        rtMaven.resolver releaseRepo: releases, snapshotRepo: snapshotRepo, server: server
         rtDocker = Artifactory.docker server: server
         buildInfo = Artifactory.newBuildInfo()
     }
