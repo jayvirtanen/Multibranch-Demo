@@ -29,6 +29,8 @@ node {
         server = Artifactory.server jpd
         descriptor.version = '1.0.0'
         descriptor.pomFile = 'webapp/pom.xml'
+        descriptor.setVersion "1.0.1"
+        descriptor.transform()
         // Tool name from Jenkins configuration
         rtMaven.tool = 'Maven'
         rtMaven.deployer releaseRepo: releases, snapshotRepo: snapshots, server: server
@@ -39,7 +41,7 @@ node {
 
     stage ('Exec Maven') {
         rtMaven.run pom: 'webapp/pom.xml', goals: 'clean install', buildInfo: buildInfo
-        sh 'cp webapp/target/*.war docker/'
+        sh 'cp webapp/target/DropDown*.war docker/'
         sh 'ls docker/'
     }
 
