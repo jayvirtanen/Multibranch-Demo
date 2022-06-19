@@ -35,7 +35,7 @@ node {
     }
 
     stage ('Exec Maven') {
-        rtMaven.run pom: 'webapp/pom.xml', goals: 'clean install war:war', buildInfo: buildInfo
+        rtMaven.run pom: 'webapp/pom.xml', goals: 'clean install', buildInfo: buildInfo
         sh 'cp webapp/target/*.war docker/'
         sh 'ls docker/'
     }
