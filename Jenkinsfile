@@ -10,6 +10,7 @@ node {
     String jpd
     String registry
     String dockerlocal
+    String branch
 
     stage ('Env Init'){
 
@@ -19,6 +20,7 @@ node {
     jpd = "${ARTIFACTORY_SERVER}"
     registry = "${REGISTRY_URL}"
     dockerlocal = "${DOCKER_REPO}"
+    branch = "${BRANCH_NAME}"
     }    
 
     stage ('Clone') {
@@ -28,7 +30,7 @@ node {
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
         server = Artifactory.server jpd
-        if (release=true && "${BRANCH_NAME}"='master')
+        if (release==true && branch=='master')
         {
         descriptor.version = '1.0.0'
         descriptor.pomFile = 'webapp/pom.xml'
@@ -57,11 +59,11 @@ node {
 
     stage ('Build docker image') {
 
-        docker.build(registry + 'webapp-container:' + "${BRANCH_NAME}" + "${BUILD_NUMBER}", 'docker')
+        docker.build(registry + 'webapp-container:' + branch + "${BUILD_NUMBER}", 'docker')
     }
 
     stage ('Push image to Artifactory') {
-        rtDocker.push registry + 'webapp-container:' + "${BRANCH_NAME}" + "${BUILD_NUMBER}", dockerlocal, buildInfo
+        rtDocker.push registry + 'webapp-container:' + branch + "${BUILD_NUMBER}", dockerlocal, buildInfo
     }
 
         stage ('Publish build info') {
