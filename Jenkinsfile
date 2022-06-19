@@ -10,7 +10,7 @@ node {
 
     stage ('Init'){
     sh 'env'
-    echo '$SNAPSHOT_REPO'
+    echo '${env.SNAPSHOT_REPO}'
 	snapshots = '$SNAPSHOT_REPO'
     releases = '$RELEASE_REPO'
     jpd = '$ARTIFACTORY_SERVER'
