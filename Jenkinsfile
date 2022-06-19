@@ -7,7 +7,7 @@ node {
     
 
     stage ('Clone') {
-        git url: 'https://github.com/jayvirtanen/Multibranch-Demo.git', credentialsId: ${env.GITHUB_CREDS}	
+        git url: 'https://github.com/jayvirtanen/Multibranch-Demo.git'
     }
 
     stage ('Artifactory configuration') {
