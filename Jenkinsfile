@@ -45,7 +45,6 @@ node {
 
     stage ('Exec Maven') {
         rtMaven.run pom: 'webapp/pom.xml', goals: 'clean install', buildInfo: buildInfo
-        sh 'rm docker/*.war'
         sh 'cp webapp/target/DropDown*.war docker/'
         sh 'ls docker/'
     }
