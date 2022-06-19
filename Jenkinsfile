@@ -5,7 +5,7 @@ node {
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
     stage ('Test'){
-	sh 'echo ${env.ARTIRFACTORY_SERVER}'
+	sh 'echo $ARTIRFACTORY_SERVER'
     }    
 
     stage ('Clone') {
