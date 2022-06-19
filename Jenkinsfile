@@ -6,7 +6,7 @@ node {
     def buildInfo
 
     stage ('Clone') {
-        git url: 'https://github.com/jayvirtanen/Multibranch-Demo.git'
+        git url: 'https://github.com/jayvirtanen/Multibranch-Demo.git', credentialsId: $GITHUB_CREDS	
     }
 
     stage ('Artifactory configuration') {
