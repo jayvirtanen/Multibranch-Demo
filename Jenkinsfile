@@ -9,6 +9,7 @@ node {
     String jpd
 
     stage ('Init'){
+    sh 'env'
 	snapshots = ${SNAPSHOT_REPO}
     releases = ${RELEASE_REPO}
     jpd = ${ARTIFACTORY_SERVER}
