@@ -12,7 +12,7 @@ node {
 
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
-        server = Artifactory.server 'env.ARTIFACTORY_SERVER'
+        server = Artifactory.server 'jaytest4'
 
         // Tool name from Jenkins configuration
         rtMaven.tool = Maven
