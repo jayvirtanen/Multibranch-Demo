@@ -13,6 +13,7 @@ node {
 	snapshots = '${SNAPSHOT_REPO}'
     releases = '${RELEASE_REPO}'
     jpd = '${ARTIFACTORY_SERVER}'
+    echo jpd
     }    
 
     stage ('Clone') {
