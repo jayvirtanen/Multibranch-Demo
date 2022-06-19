@@ -2,6 +2,7 @@
 node {
     def server
     def rtMaven = Artifactory.newMavenBuild()
+    def descriptor = Artifactory.mavenDescriptor()
     def buildInfo
     String snapshots
     String releases
@@ -26,6 +27,8 @@ node {
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
         server = Artifactory.server jpd
+        descriptor.version = '1.0.0'
+        descriptor.pomFile = 'webapp/pom.xml'
         // Tool name from Jenkins configuration
         rtMaven.tool = 'Maven'
         rtMaven.deployer releaseRepo: releases, snapshotRepo: snapshots, server: server
