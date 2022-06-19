@@ -1,6 +1,6 @@
 package com.sample;
 
-import com.sample.model.LiquorType;
+import com.sample.model.ItemType;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,22 +13,22 @@ import java.util.List;
 
 
 @WebServlet(
-        name = "selectliquorservlet",
-        urlPatterns = "/SelectLiquor"
+        name = "DropDown",
+        urlPatterns = "/dropdown"
 )
-public class SelectLiquorServlet extends HttpServlet {
+public class DropDown extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String liquorType = req.getParameter("Type");
+        String itemType = req.getParameter("Type");
 
-        LiquorService liquorService = new LiquorService();
-        LiquorType l = LiquorType.valueOf(liquorType);
+        ListService listService = new ListService();
+        ItemType l = ItemType.valueOf(liquorType);
 
-        List liquorBrands = liquorService.getAvailableBrands(l);
+        List itemTypes = listService.getAvailableBrands(l);
 
-        req.setAttribute("brands", liquorBrands);
+        req.setAttribute("types", itemTypes);
         RequestDispatcher view = req.getRequestDispatcher("result.jsp");
         view.forward(req, resp);
 
