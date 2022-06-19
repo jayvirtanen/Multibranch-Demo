@@ -15,8 +15,8 @@ node {
     stage ('Env Init'){
 
     echo "${SNAPSHOT_REPO}"
-	snapshots = "${SNAPSHOT_REPO}"
-    releases = "${RELEASE_REPO}"
+	snapshotRepo = "${SNAPSHOT_REPO}"
+    releaseRepo = "${RELEASE_REPO}"
     jpd = "${ARTIFACTORY_SERVER}"
     registry = "${REGISTRY_URL}"
     dockerlocal = "${DOCKER_REPO}"
@@ -30,12 +30,10 @@ node {
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
         server = Artifactory.server jpd
-        if (release==true && branch=='master')
-        {
-        descriptor.version = '1.0.0'
-        descriptor.pomFile = 'webapp/pom.xml'
-        descriptor.setVersion "1.0.1"
-        descriptor.transform()
+        if (release==true && branch=='master'){
+            descriptor.pomFile = 'webapp/pom.xml'
+            descriptor.setVersion "1.0.1"
+            descriptor.transform()
         }
         // Tool name from Jenkins configuration
         rtMaven.tool = 'Maven'
