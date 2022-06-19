@@ -9,7 +9,7 @@ node {
     String registry
     String dockerlocal
 
-    stage ('Init'){
+    stage ('Env Init'){
 
     echo "${SNAPSHOT_REPO}"
 	snapshots = "${SNAPSHOT_REPO}"
@@ -36,6 +36,8 @@ node {
 
     stage ('Exec Maven') {
         rtMaven.run pom: 'webapp/pom.xml', goals: 'clean install war:war', buildInfo: buildInfo
+        sh 'cp webapp/target/*.war docker/'
+        sh 'ls docker/'
     }
 
         stage ('Add properties') {
@@ -44,6 +46,7 @@ node {
     }
 
     stage ('Build docker image') {
+
         docker.build(registry + 'webapp-container:' + "${BRANCH_NAME}" + "${BUILD_NUMBER}", 'docker')
     }
 
