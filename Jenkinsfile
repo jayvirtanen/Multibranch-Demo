@@ -4,9 +4,10 @@ node {
     def server
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
+    
 
     stage ('Clone') {
-        git url: 'https://github.com/jayvirtanen/Multibranch-Demo.git', credentialsId: $GITHUB_CREDS	
+        git url: 'https://github.com/jayvirtanen/Multibranch-Demo.git', credentialsId: ${env.GITHUB_CREDS}	
     }
 
     stage ('Artifactory configuration') {
