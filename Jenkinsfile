@@ -1,5 +1,4 @@
 
-
 node {
     def server
     def rtMaven = Artifactory.newMavenBuild()
@@ -9,12 +8,11 @@ node {
     String jpd
 
     stage ('Init'){
-    sh 'env'
-    echo ${env.SNAPSHOT_REPO}
-	snapshots = '$SNAPSHOT_REPO'
-    releases = '$RELEASE_REPO'
-    jpd = '$ARTIFACTORY_SERVER'
-    echo jpd
+
+    echo "${SNAPSHOT_REPO}"
+	snapshots = "${SNAPSHOT_REPO}"
+    releases = "${RELEASE_REPO}"
+    jpd = "${ARTIFACTORY_SERVER}"
     }    
 
     stage ('Clone') {
@@ -27,8 +25,8 @@ node {
 
         // Tool name from Jenkins configuration
         rtMaven.tool = 'Maven'
-        rtMaven.deployer releaseRepo: 'default-maven-virtual', snapshotRepo: 'default-maven-virtual', server: server
-        rtMaven.resolver releaseRepo: 'default-maven-virtual', snapshotRepo: 'default-maven-virtual', server: server
+        rtMaven.deployer releaseRepo: releases, snapshotRepo: snapshots, server: server
+        rtMaven.resolver releaseRepo: releases, snapshotRepo: snapshots, server: server
         buildInfo = Artifactory.newBuildInfo()
     }
 
