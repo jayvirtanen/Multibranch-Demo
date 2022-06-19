@@ -4,7 +4,9 @@ node {
     def server
     def rtMaven = Artifactory.newMavenBuild()
     def buildInfo
-    
+    stage ('Test'){
+	sh 'env'
+    }    
 
     stage ('Clone') {
         git url: 'https://github.com/jayvirtanen/Multibranch-Demo.git'
