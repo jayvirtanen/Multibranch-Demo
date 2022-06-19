@@ -44,7 +44,7 @@ node {
     }
 
     stage ('Build docker image') {
-        docker.build(registry + 'webapp-container:' + "${BRANCH_NAME}" + "${BUILD_NUMBER}", 'docker/')
+        docker.build(registry + 'webapp-container:' + "${BRANCH_NAME}" + "${BUILD_NUMBER}", 'docker')
     }
 
     stage ('Push image to Artifactory') {
