@@ -4,8 +4,9 @@ node {
     def rtMaven = Artifactory.newMavenBuild()
     def descriptor = Artifactory.mavenDescriptor()
     def buildInfo
-    String snapshots
-    String releases
+    def release = false
+    String snapshotRepo
+    String releaseRepo
     String jpd
     String registry
     String dockerlocal
@@ -27,10 +28,13 @@ node {
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage Jenkins --> Configure System:
         server = Artifactory.server jpd
+        if (release=true && "${BRANCH_NAME}"='master')
+        {
         descriptor.version = '1.0.0'
         descriptor.pomFile = 'webapp/pom.xml'
         descriptor.setVersion "1.0.1"
         descriptor.transform()
+        }
         // Tool name from Jenkins configuration
         rtMaven.tool = 'Maven'
         rtMaven.deployer releaseRepo: releases, snapshotRepo: snapshots, server: server
@@ -41,6 +45,7 @@ node {
 
     stage ('Exec Maven') {
         rtMaven.run pom: 'webapp/pom.xml', goals: 'clean install', buildInfo: buildInfo
+        sh 'rm docker/*.war'
         sh 'cp webapp/target/DropDown*.war docker/'
         sh 'ls docker/'
     }
