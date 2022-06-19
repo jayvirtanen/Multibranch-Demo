@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
+
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -18,11 +19,12 @@
         </dependency>
     </dependencies>
     <properties>
-      <maven.compiler.source>1.6</maven.compiler.source>
-      <maven.compiler.target>1.6</maven.compiler.target>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
+    
     <build>
-        <finalName>SampleServlet</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>

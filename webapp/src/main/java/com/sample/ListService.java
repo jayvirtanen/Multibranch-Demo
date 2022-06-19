@@ -1,6 +1,6 @@
 package com.sample;
 
-import com.sample.model.LiquorType;
+import com.sample.model.ItemType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,20 +14,20 @@ public class ListService {
 
         List types = new ArrayList();
 
-        if(type.equals(LiquorType.BIRDS)){
+        if(type.equals(ItemType.BIRDS)){
             types.add("Ducks");
             types.add(("Chickens"));
 
-        }else if(type.equals(LiquorType.FISH)){
+        }else if(type.equals(ItemType.FISH)){
             types.add("Salmon");
             types.add("Cod");
 
-        }else if(type.equals(LiquorType.MAMMALS)){
+        }else if(type.equals(ItemType.MAMMALS)){
             types.add("Cows");
 
         }else {
-            brands.add("No Brand Available");
+            types.add("No Brand Available");
         }
-    return brands;
+    return types;
     }
 }

@@ -24,9 +24,9 @@ public class DropDown extends HttpServlet {
         String itemType = req.getParameter("Type");
 
         ListService listService = new ListService();
-        ItemType l = ItemType.valueOf(liquorType);
+        ItemType l = ItemType.valueOf(itemType);
 
-        List itemTypes = listService.getAvailableBrands(l);
+        List itemTypes = listService.getAvailableTypes(l);
 
         req.setAttribute("types", itemTypes);
         RequestDispatcher view = req.getRequestDispatcher("result.jsp");
