@@ -7,7 +7,7 @@ node {
     String releases
     String jpd
     String registry
-    String docker-local
+    String dockerlocal
 
     stage ('Init'){
 
@@ -16,7 +16,7 @@ node {
     releases = "${RELEASE_REPO}"
     jpd = "${ARTIFACTORY_SERVER}"
     registry = "${REGISTRY_URL}"
-    docker-local = "${DOCKER_REPO}"
+    dockerlocal = "${DOCKER_REPO}"
     }    
 
     stage ('Clone') {
@@ -48,7 +48,7 @@ node {
     }
 
     stage ('Push image to Artifactory') {
-        rtDocker.push registry + 'webapp-container:' + "${BRANCH_NAME}" + "${BUILD_NUMBER}", docker-local, buildInfo
+        rtDocker.push registry + 'webapp-container:' + "${BRANCH_NAME}" + "${BUILD_NUMBER}", dockerlocal, buildInfo
     }
 
         stage ('Publish build info') {
