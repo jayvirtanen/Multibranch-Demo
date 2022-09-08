@@ -5,7 +5,7 @@ pipeline {
             steps {
                 container('maven'){
                 sh 'mvn clean package -f webapp/'
-                sh 'ls'
+                sh 'ls webapp/'
                 }
             }
         }
