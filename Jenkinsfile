@@ -9,14 +9,15 @@ pipeline {
           sh 'mvn clean package -f webapp/'
           sh 'ls webapp/'
         }
-
         archiveArtifacts 'webapp/target/*'
       }
     }
-
     stage('Docker Build') {
       steps {
-        copyRemoteArtifacts(from: 'Maven Build', includes: '*')
+        container(name: 'maven') {
+          sh 'ls webapp/'
+          sh 'docker version'
+        }
       }
     }
 
