@@ -4,7 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 container('maven'){
-                sh 'mvn clean build -f webapp/'
+                sh 'mvn clean package -f webapp/'
                 sh 'ls'
                 }
             }
