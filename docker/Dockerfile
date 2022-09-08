@@ -25,7 +25,7 @@ RUN apk del curl && \
 
 EXPOSE 8080
 
-COPY *.war $CATALINA_HOME/webapps/webapp.war
+COPY *.war $CATALINA_HOME/webapps/dropdown.war
 
 COPY startup.sh /opt/startup.sh
 
