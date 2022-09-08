@@ -14,8 +14,8 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-        container(name: 'kaniko') {
-          sh '#!/busybox/sh echo "hello world"'
+        container(name: 'kaniko', shell: '/busybox/sh') {
+          sh 'echo "hello world"'
         }
       }
     }
