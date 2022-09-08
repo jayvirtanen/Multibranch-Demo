@@ -14,9 +14,8 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-        container(name: 'maven') {
-          sh 'ls webapp/'
-          sh 'docker version'
+        container(name: 'buildah') {
+          sh 'buildah images'
         }
       }
     }
