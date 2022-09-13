@@ -12,8 +12,9 @@ pipeline {
         container(name: 'maven') {
           sh 'mvn clean package -f webapp/'
           sh 'ls webapp/'
+          stash(name: 'WebApp Binaries', includes: 'webapp/target/**')
+          stash(name: 'dockerfile', includes: 'docker/Dockerfile')
         }
-        archiveArtifacts 'webapp/target/*'
       }
     }
     stage('Docker Build') {
@@ -24,7 +25,10 @@ pipeline {
       }
       steps {
         container(name: 'kaniko', shell: '/busybox/sh') {
+          unstash 'WebApp Binaries'
+          unstash 'dockerfile'
           sh 'ls -lart'
+          sh '/kaniko/executor --context docker/ --destination jayvirtanen/java-applet:latest'
         }
       }
     }
