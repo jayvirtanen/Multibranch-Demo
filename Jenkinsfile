@@ -28,7 +28,7 @@ pipeline {
           unstash 'WebApp Binaries'
           unstash 'dockerfile'
           sh 'ls -lart'
-          sh '/kaniko/executor --context docker/ --destination jayvirtanen/java-applet:latest'
+          sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:latest'
         }
       }
     }
