@@ -27,8 +27,10 @@ pipeline {
         container(name: 'kaniko', shell: '/busybox/sh') {
           unstash 'WebApp Binaries'
           unstash 'dockerfile'
+          sh 'printenv'
           sh 'ls -lart /kaniko'
           sh 'ls -lart /kaniko/.docker/'
+          sh 'cp /kaniko/data/config.json /kaniko/.docker/config.json'
           sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:latest'
         }
       }
