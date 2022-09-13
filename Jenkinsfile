@@ -27,9 +27,10 @@ pipeline {
         container(name: 'kaniko', shell: '/busybox/sh') {
           unstash 'WebApp Binaries'
           unstash 'dockerfile'
-          sh 'ls -lart /kaniko/.docker'
-          sh 'cat /kaniko/.docker/config.json'
-          sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:latest'
+          sh '''#!/busybox/sh
+            echo "FROM jenkins/inbound-agent:latest" > Dockerfile
+            /kaniko/executor --context `pwd` --destination janivirtanen/hello-kaniko:latest 
+          '''
         }
       }
     }
