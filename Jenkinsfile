@@ -1,5 +1,6 @@
 @Library ('shared-libs') _
 pipeline {
+  agent none
   stages {
     stage('Maven Build') {
       agent{
