@@ -24,7 +24,7 @@ pipeline {
       }
       steps {
         container(name: 'kaniko', shell: '/busybox/sh') {
-          sh 'ls -lart /webapp'
+          sh 'ls -lart'
         }
       }
     }
