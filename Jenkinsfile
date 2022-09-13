@@ -29,7 +29,7 @@ pipeline {
           unstash 'dockerfile'
           sh 'ls -lart /kaniko'
           sh 'cd /kaniko/.docker/'
-          sh 'cat ..data/config.json'
+          sh 'cat config.json'
           sh 'cp /kaniko/.docker/data/config.json /kaniko/.docker/config.json'
           sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:latest'
         }
