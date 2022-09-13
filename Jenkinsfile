@@ -29,7 +29,7 @@ pipeline {
           unstash 'dockerfile'
           sh '''#!/busybox/sh
             echo "FROM jenkins/inbound-agent:latest" > Dockerfile
-            /kaniko/executor --context `pwd` --destination janivirtanen/hello-kaniko:latest 
+            /kaniko/executor --context `pwd` --destination janivirtanen/hello-kaniko:latest --verbosity debug
           '''
         }
       }
