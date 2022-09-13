@@ -1,9 +1,12 @@
+@Library ('shared-libs') _
 pipeline {
-  agent {
-    label 'mypodtemplate-v1'
-  }
   stages {
     stage('Maven Build') {
+      agent{
+        kubernetes{
+          yaml mavenTemplate()
+        }
+      }
       steps {
         container(name: 'maven') {
           sh 'mvn clean package -f webapp/'
@@ -13,6 +16,11 @@ pipeline {
       }
     }
     stage('Docker Build') {
+      agent{
+        kubernetes{
+          yaml kanikoTemplate()
+        }
+      }
       steps {
         container(name: 'kaniko', shell: '/busybox/sh') {
           sh 'echo "hello world"'
