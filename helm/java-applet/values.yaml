@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: janivirtanen/java-applet
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
@@ -46,18 +46,12 @@ ingress:
   type: loadBalancer
   annotations:
     kubernetes.io/ingress.class: nginx
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/rewrite-target: "/dropdown"
   hosts:
     - host: app.jvirtanen.com
       paths:
-        - path: /dropdown
+        - path: /
           pathType: Prefix
           port: 8080
-  tls:
-    - secretName: app-jvirtanen-com-tls
-      hosts:
-        - app.jvirtanen.com
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
