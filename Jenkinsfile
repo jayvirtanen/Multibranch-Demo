@@ -5,6 +5,7 @@ pipeline {
     stage('Maven Build') {
       agent{
         kubernetes{
+          namespace 'ci-agents'
           yaml mavenTemplate()
         }
       }
@@ -20,6 +21,7 @@ pipeline {
     stage('Docker Build') {
       agent{
         kubernetes{
+          namespace 'ci-agents'
           yaml kanikoTemplate()
         }
       }
