@@ -1,6 +1,7 @@
 @Library ('shared-libs') _
 pipeline {
   agent none
+  properties([parameters([string(defaultValue: 'latest', name: 'version')])])
   stages {
     stage('Maven Build') {
       agent{
