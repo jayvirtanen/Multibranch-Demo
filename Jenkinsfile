@@ -6,6 +6,7 @@ pipeline {
       agent{
         kubernetes{
           yaml mavenTemplate()
+          namespace cloudbees-platform
         }
       }
       steps {
@@ -21,6 +22,7 @@ pipeline {
       agent{
         kubernetes{
           yaml kanikoTemplate()
+          namespace cloudbees-platform
         }
       }
       steps {
