@@ -35,7 +35,7 @@ pipeline {
           sh 'mv webapp/target/* docker/'
           sh 'ls docker'
           sh 'echo $version'
-          sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:$TAG'
+          sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:$version'
         }
       }
     }
