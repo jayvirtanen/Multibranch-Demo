@@ -1,12 +1,15 @@
 @Library ('shared-libs') _
 pipeline {
   agent none
+  parameters {
+  string defaultValue: 'latest', name: 'version'
+	}
   stages {
     stage('Maven Build') {
       agent{
         kubernetes{
-          namespace 'ci-agents'
           yaml mavenTemplate()
+          namespace 'cloudbees-platform'
         }
       }
       steps {
@@ -21,8 +24,8 @@ pipeline {
     stage('Docker Build') {
       agent{
         kubernetes{
-          namespace 'ci-agents'
           yaml kanikoTemplate()
+          namespace 'cloudbees-platform'
         }
       }
       steps {
@@ -31,7 +34,8 @@ pipeline {
           unstash 'dockerfile'
           sh 'mv webapp/target/* docker/'
           sh 'ls docker'
-          sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:latest'
+          sh 'echo $version'
+          sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:$version'
         }
       }
     }
