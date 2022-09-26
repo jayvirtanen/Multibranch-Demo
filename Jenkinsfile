@@ -27,6 +27,7 @@ pipeline {
           yaml kanikoTemplate()
           namespace 'cloudbees-platform'
         }
+      }
       environment{
         TAG = params.version
       }
