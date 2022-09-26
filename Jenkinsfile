@@ -28,9 +28,6 @@ pipeline {
           namespace 'cloudbees-platform'
         }
       }
-      environment{
-        TAG = params.version
-      }
       steps {
         container(name: 'kaniko', shell: '/busybox/sh') {
           unstash 'WebApp Binaries'
