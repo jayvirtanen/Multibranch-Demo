@@ -32,9 +32,10 @@ pipeline {
         container(name: 'kaniko', shell: '/busybox/sh') {
           unstash 'WebApp Binaries'
           unstash 'dockerfile'
+          env.TAG = params.version
           sh 'mv webapp/target/* docker/'
           sh 'ls docker'
-          sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:latest'
+          sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:$TAG'
         }
       }
     }
