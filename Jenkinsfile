@@ -27,12 +27,11 @@ pipeline {
           yaml kanikoTemplate()
           namespace 'cloudbees-platform'
         }
+      environment{
+        TAG = params.version
       }
       steps {
         container(name: 'kaniko', shell: '/busybox/sh') {
-        environment{
-          TAG = params.version
-          }
           unstash 'WebApp Binaries'
           unstash 'dockerfile'
           sh 'mv webapp/target/* docker/'
