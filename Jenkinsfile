@@ -15,7 +15,6 @@ pipeline {
       steps {
         container(name: 'maven') {
           sh 'mvn clean package -f webapp/'
-          sh 'ls webapp/'
           stash(name: 'WebApp Binaries', includes: 'webapp/target/*.war')
           stash(name: 'dockerfile', includes: 'docker/Dockerfile')
         }
@@ -33,8 +32,6 @@ pipeline {
           unstash 'WebApp Binaries'
           unstash 'dockerfile'
           sh 'mv webapp/target/* docker/'
-          sh 'ls docker'
-          sh 'echo $version'
           sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:$version'
         }
       }
