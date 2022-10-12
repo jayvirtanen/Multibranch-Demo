@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: janivirtanen/java-applet
+  repository: IMAGENAME
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
@@ -47,7 +47,7 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
   hosts:
-    - host: app.jvirtanen.com
+    - host: HOST
       paths:
         - path: /
           pathType: Prefix
