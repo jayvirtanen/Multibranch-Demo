@@ -9,7 +9,7 @@ pipeline {
       agent{
         kubernetes{
           yaml mavenTemplate()
-          namespace 'cloudbees-platform'
+          namespace 'default'
         }
       }
       steps {
