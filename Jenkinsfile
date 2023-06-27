@@ -24,7 +24,7 @@ pipeline {
       agent{
         kubernetes{
           yaml kanikoTemplate()
-          namespace 'cloudbees-platform'
+          namespace 'default'
         }
       }
       steps {
