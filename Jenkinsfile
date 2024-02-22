@@ -31,6 +31,7 @@ pipeline {
         container(name: 'kaniko', shell: '/busybox/sh') {
           unstash 'WebApp Binaries'
           unstash 'dockerfile'
+	  sh 'echo "hello world"'
           sh 'mv webapp/target/* docker/'
           sh '/kaniko/executor --context docker/ --destination janivirtanen/java-applet:$version'
         }
