@@ -13,6 +13,7 @@ pipeline {
       }
       steps {
         container(name: 'maven') {
+	  echo 'another patch'
           sh 'mvn clean package -f webapp/'
           stash(name: 'WebApp Binaries', includes: 'webapp/target/*.war')
           stash(name: 'dockerfile', includes: 'docker/Dockerfile')
