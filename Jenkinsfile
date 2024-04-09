@@ -1,6 +1,6 @@
 @Library ('shared-libs') _
 pipeline {
-  agent any
+  agent none
   parameters {
   string defaultValue: 'latest', name: 'version'
 	}
@@ -36,14 +36,4 @@ pipeline {
       }
     }
   }
- post {
-        always {
-            cleanWs(cleanWhenNotBuilt: false,
-                    deleteDirs: true,
-                    disableDeferredWipeout: true,
-                    notFailBuild: true,
-                    patterns: [[pattern: '.gitignore', type: 'INCLUDE'],
-                               [pattern: '.propsfile', type: 'EXCLUDE']])
-        }
-    }
 }
