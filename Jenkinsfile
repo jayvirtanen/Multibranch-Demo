@@ -1,6 +1,6 @@
 pipeline {
-  agent kubernetes
-  {
+  agent{ 
+    kubernetes{
   yaml """
 kind: Pod
 spec:
@@ -31,6 +31,7 @@ spec:
             - key: .dockerconfigjson
               path: config.json
 """
+  }
   }
   parameters {
   string defaultValue: 'latest', name: 'version'
