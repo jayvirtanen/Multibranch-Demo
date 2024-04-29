@@ -9,7 +9,6 @@ pipeline {
       agent{
         kubernetes{
           yaml mavenTemplate()
-          namespace 'default'
         }
       }
       steps {
@@ -25,7 +24,6 @@ pipeline {
       agent{
         kubernetes{
           yaml kanikoTemplate()
-          namespace 'default'
         }
       }
       steps {
