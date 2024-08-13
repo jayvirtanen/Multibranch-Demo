@@ -19,6 +19,12 @@ pipeline {
         }
       }
     }
+    stage('Wait'){
+      agent none
+      steps{
+        sleep 60
+      }
+    }
     stage('Docker Build') {
       agent{
         kubernetes{
